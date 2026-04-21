@@ -1,64 +1,72 @@
-body {
-    background: #050505;
-    color: #fff;
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    display: flex;
+const canvas = new fabric.Canvas('gfxCanvas');
+
+// 1. 100 ഫോണ്ടുകൾ ആഡ് ചെയ്യുന്നു (Google Fonts വഴി)
+const fonts = ['Orbitron', 'Bangers', 'Roboto', 'Nosifer', 'Permanent Marker', 'Monoton', 'Akronim', 'Creepster']; // ഇതിൽ 100 എണ്ണം വരെ ലിസ്റ്റ് ചെയ്യാം
+const fontSelect = document.getElementById('fontFamily');
+
+fonts.forEach(font => {
+    let option = document.createElement('option');
+    option.value = font;
+    option.innerText = font;
+    fontSelect.appendChild(option);
+});
+
+// 2. 50 ബാനറുകൾ ലോഡ് ചെയ്യുന്നു
+const bannerList = document.getElementById('bannerList');
+for (let i = 1; i <= 50; i++) {
+    let img = document.createElement('img');
+    img.src = `banners/banner${i}.png`; // നിങ്ങളുടെ ഫോൾഡറിലെ ബാനർ ഇമേജ് പാത്ത്
+    img.className = 'banner-item';
+    img.onclick = () => setBackground(img.src);
+    bannerList.appendChild(img);
 }
 
-.editor-wrapper {
-    display: flex;
-    width: 100%;
-    height: 100vh;
+// ബാനർ ബാക്ക്ഗ്രൗണ്ട് ആയി സെറ്റ് ചെയ്യാൻ
+function setBackground(url) {
+    fabric.Image.fromURL(url, function(img) {
+        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+            scaleX: canvas.width / img.width,
+            scaleY: canvas.height / img.height
+        });
+    });
 }
 
-.sidebar {
-    width: 300px;
-    background: #111;
-    padding: 20px;
-    overflow-y: auto;
-    border-right: 1px solid #333;
+// ടെക്സ്റ്റ് ആഡ് ചെയ്യാൻ
+function addText() {
+    const textVal = document.getElementById('textInput').value;
+    const text = new fabric.IText(textVal || 'GFX KING', {
+        left: 100,
+        top: 100,
+        fontFamily: fontSelect.value,
+        fill: '#00ffcc',
+        fontSize: 60
+    });
+    canvas.add(text);
 }
 
-.canvas-container {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #1a1a1a;
+// ഗ്ലോ എഫക്റ്റ് നൽകാൻ
+function applyGlow() {
+    const activeObj = canvas.getActiveObject();
+    if (activeObj) {
+        activeObj.set({
+            shadow: new fabric.Shadow({
+                color: '#00ffcc',
+                blur: 20
+            })
+        });
+        canvas.renderAll();
+    }
 }
 
-canvas {
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
-    background: #000;
+// ഡൗൺലോഡ്
+function downloadImage() {
+    const dataURL = canvas.toDataURL({
+        format: 'png',
+        quality: 1
+    });
+    const link = document.createElement('a');
+    link.download = 'gfx-pro-dp.png';
+    link.href = dataURL;
+    link.click();
 }
 
-input, select, button {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
-    background: #222;
-    color: #fff;
-    border: 1px solid #444;
-}
-
-.banner-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    max-height: 200px;
-    overflow-y: scroll;
-}
-
-.banner-item {
-    width: 100%;
-    cursor: pointer;
-    border: 1px solid #333;
-}
-
-.download-btn {
-    background: #00ff88;
-    color: #000;
-    font-weight: bold;
-    margin-top: 20px;
-}
