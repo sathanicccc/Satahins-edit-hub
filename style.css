@@ -1,53 +1,65 @@
 body {
-    background-color: #0f0f12;
-    color: white;
-    font-family: 'Orbitron', sans-serif;
+    background: #050505;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    display: flex;
+}
+
+.editor-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 300px;
+    background: #111;
+    padding: 20px;
+    overflow-y: auto;
+    border-right: 1px solid #333;
+}
+
+.canvas-container {
+    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
-
-.container {
-    text-align: center;
-    background: #1a1a1f;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+    background: #1a1a1a;
 }
 
 canvas {
-    max-width: 100%;
-    height: auto;
-    border: 3px solid #00ffcc;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.controls {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    background: #000;
 }
 
 input, select, button {
-    padding: 12px;
-    border-radius: 5px;
-    border: none;
-    font-size: 16px;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
 }
 
-button {
-    background: #00ffcc;
+.banner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.banner-item {
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid #333;
+}
+
+.download-btn {
+    background: #00ff88;
     color: #000;
     font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #00cca3;
-    transform: scale(1.05);
+    margin-top: 20px;
 }
 
