@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GFX Pro DP Maker</title>
+    <title>GFX Pro Editor</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>GFX Pro DP Maker</h1>
-        
-        <div class="canvas-area">
-            <canvas id="dpCanvas" width="800" height="800"></canvas>
+    <div class="editor-wrapper">
+        <div class="sidebar">
+            <h3>GFX Tools</h3>
+            
+            <label>Add Text</label>
+            <input type="text" id="textInput" placeholder="Type name here...">
+            <button onclick="addText()">Add to Design</button>
+
+            <label>Select Font (100+)</label>
+            <select id="fontFamily" onchange="updateText()"></select>
+
+            <label>Banner Style (50+)</label>
+            <div class="banner-grid" id="bannerList">
+                </div>
+
+            <label>Effects</label>
+            <button onclick="applyGlow()">Neon Glow</button>
+            <button onclick="downloadImage()" class="download-btn">Download DP</button>
         </div>
 
-        <div class="controls">
-            <input type="text" id="nameInput" placeholder="നിങ്ങളുടെ പേര് ടൈപ്പ് ചെയ്യൂ...">
-            
-            <div class="options">
-                <select id="fontSelect">
-                    <option value="Orbitron">Orbitron (Gaming)</option>
-                    <option value="Bangers">Bangers (Style)</option>
-                    <option value="Arial">Basic</option>
-                </select>
-                <input type="color" id="colorPicker" value="#00ffcc">
-            </div>
-
-            <button id="downloadBtn">Download DP</button>
+        <div class="canvas-container">
+            <canvas id="gfxCanvas" width="800" height="800"></canvas>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
-
