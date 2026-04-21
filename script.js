@@ -1,39 +1,64 @@
-const canvas = document.getElementById('dpCanvas');
-const ctx = canvas.getContext('2d');
-const nameInput = document.getElementById('nameInput');
-const fontSelect = document.getElementById('fontSelect');
-const colorPicker = document.getElementById('colorPicker');
-const downloadBtn = document.getElementById('downloadBtn');
-
-// ബേസിക് ബാക്ക്ഗ്രൗണ്ട് സെറ്റ് ചെയ്യുക
-function updateCanvas() {
-    // Background
-    ctx.fillStyle = "#000";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    // GFX Effects (ഒരു ലളിതമായ ഗ്ലോ)
-    ctx.shadowBlur = 20;
-    ctx.shadowColor = colorPicker.value;
-    
-    // Text Style
-    ctx.fillStyle = colorPicker.value;
-    ctx.font = `80px ${fontSelect.value}`;
-    ctx.textAlign = "center";
-    ctx.fillText(nameInput.value || "YOUR NAME", canvas.width / 2, canvas.height / 2);
+body {
+    background: #050505;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    display: flex;
 }
 
-// ഇവന്റ് ലിസണേഴ്സ്
-nameInput.addEventListener('input', updateCanvas);
-fontSelect.addEventListener('change', updateCanvas);
-colorPicker.addEventListener('input', updateCanvas);
+.editor-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
 
-// ഡൗൺലോഡ് ഫംഗ്ഷൻ
-downloadBtn.addEventListener('click', () => {
-    const link = document.createElement('a');
-    link.download = 'my-gfx-dp.png';
-    link.href = canvas.toDataURL();
-    link.click();
-});
+.sidebar {
+    width: 300px;
+    background: #111;
+    padding: 20px;
+    overflow-y: auto;
+    border-right: 1px solid #333;
+}
 
-// ആദ്യം തന്നെ ഒന്ന് ലോഡ് ചെയ്യാൻ
-updateCanvas();
+.canvas-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a1a;
+}
+
+canvas {
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    background: #000;
+}
+
+input, select, button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+.banner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.banner-item {
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid #333;
+}
+
+.download-btn {
+    background: #00ff88;
+    color: #000;
+    font-weight: bold;
+    margin-top: 20px;
+}
