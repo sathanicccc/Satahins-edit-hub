@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GFX Pro DP Maker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>GFX Pro DP Maker</h1>
+        
+        <div class="canvas-area">
+            <canvas id="dpCanvas" width="800" height="800"></canvas>
+        </div>
+
+        <div class="controls">
+            <input type="text" id="nameInput" placeholder="നിങ്ങളുടെ പേര് ടൈപ്പ് ചെയ്യൂ...">
+            
+            <div class="options">
+                <select id="fontSelect">
+                    <option value="Orbitron">Orbitron (Gaming)</option>
+                    <option value="Bangers">Bangers (Style)</option>
+                    <option value="Arial">Basic</option>
+                </select>
+                <input type="color" id="colorPicker" value="#00ffcc">
+            </div>
+
+            <button id="downloadBtn">Download DP</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
